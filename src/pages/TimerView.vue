@@ -124,7 +124,7 @@ onUnmounted(() => {
 <template>
   <q-layout>
     <q-page-container>
-      <q-page :class="`flex flex-center ${textColor}`">
+      <q-page :class="`column items-center ${textColor}`">
         <q-btn
           class="q-ma-md"
           style="position: absolute; top: 0; right: 0;"
@@ -135,12 +135,11 @@ onUnmounted(() => {
           :color="mutedColor"
           @click="toggle"
         />
-        <div class="column items-center q-gutter-md">
-          <h1 class="row items-center justify-center" style="font-family: Roboto; font-size: 3.5rem; font-weight: bold;">
+          <h1 class="items-center justify-center" style="font-family: Roboto; font-size: 3.5rem; font-weight: bold;">
             <q-icon name="mdi-timer" color="accent" class="q-mb-sm"/>
             <span class="q-pr-sm">FreeTimer</span>
           </h1>
-          <div class>
+          <div>
             <q-circular-progress
               show-value
               :value="timerValue"
@@ -189,11 +188,11 @@ onUnmounted(() => {
               </div>
             </q-circular-progress>
           </div>
-          <div class="row q-gutter-sm q-pr-sm">
+          <div class="row q-mt-md q-gutter-sm q-pr-sm">
             <q-btn
               :outline="!autoRestart"
-              icon="mdi-timer-refresh"
               :color="autoRestart ? 'accent' : mutedColor"
+              icon="mdi-timer-refresh"
               round
               unelevated
               @click="autoRestart = !autoRestart"
@@ -202,6 +201,7 @@ onUnmounted(() => {
               v-if="!running"
               color="primary"
               icon="mdi-play"
+              style="color: #ffffffe0 !important;"
               round
               unelevated
               @click="start"
@@ -210,6 +210,7 @@ onUnmounted(() => {
               v-else
               color="primary"
               icon="mdi-pause"
+              style="color: #ffffffe0 !important;"
               round
               unelevated
               @click="pause"
@@ -217,28 +218,33 @@ onUnmounted(() => {
             <q-btn
               color="negative"
               icon="mdi-stop"
+              style="color: #ffffffe4 !important;"
               round
               unelevated
               @click="stop(); end();"
             />
           </div>
-          <div class="column">
+          <div class="col-grow column items-bottom justify-end q-pb-sm">
             <q-btn
-              class="q-mt-xl"
               no-caps
               flat
+              dense
               :color="negativeColor"
               label="reset"
               @click="setDefaults"
             />
+            <q-btn
+              flat
+              :color="mutedColor"
+              no-caps
+              dense
+              icon="mdi-code-braces-box"
+              href="https://github.com/mshems/FreeTimer"
+              target="_blank"
+              rel="noopener noreferrer"
+              label="github"
+            />
           </div>
-        </div>
-        <span
-          class="q-ma-md"
-          style="position: absolute; bottom: 0; center: 0;"
-        >
-          <a></a>
-        </span>
       </q-page>
     </q-page-container>
   </q-layout>
